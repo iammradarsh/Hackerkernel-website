@@ -1082,7 +1082,7 @@ body {
   width: 8.625rem;
   height: 8.625rem;
   border-radius: 0.5rem;
-  background-image: url("/Assets/next-case.jpg");
+  background-image: url("/Assets/next-case.webp");
   background-size: cover;
   background-position: center;
 }
@@ -1523,7 +1523,7 @@ body {
   flex-wrap: wrap;
   flex: 1 1 45%;
   min-width: 280px;
-  background-image: url("./Assets/Quote-Baclground.jpg");
+  background-image: url("./Assets/Quote-Baclground.webp");
   background-position: center;
   background-size: cover;
   border-radius: 1.625rem 0 0 1.625rem;
@@ -1648,7 +1648,7 @@ body {
   background-color: #e7e8ea;
   overflow: hidden;
   position: relative;
-  background-image: url("./Assets/Project-1.jpg");
+  background-image: url("./Assets/Project-1.webp");
   background-size: cover;
   background-position: center;
 }
@@ -2508,22 +2508,44 @@ body {
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  height: 20vh;
+  /* height: 20vh; */
   width: 100%;
   padding: 0px 120px;
   /* background-color: #383636; */
   z-index: 99;
 }
 #tenth-section .top-section .section-heading {
-  width: 70%;
+  /* width: 70%; */
   color: var(--color-white);
+}
+#tenth-section .top-section .section-heading h1 {
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: 2.375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 3.0875rem */
+  letter-spacing: -0.07125rem;
+}
+#tenth-section .top-section .section-heading h1 span {
+  font-weight: 600;
 }
 #tenth-section .top-section .section-heading p {
   font-size: 1rem;
 }
-#tenth-section .tenth-content #scroll-line3 {
+
+#tenth-section .tenth-content {
   position: relative;
-  top: 10%;
+  height: 50vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+#tenth-section .tenth-content .scroll-line {
+  position: relative;
+  /* top: 10%; */
   flex-shrink: 0;
   /* left: 0;  */
   white-space: nowrap;
@@ -2531,15 +2553,16 @@ body {
   overflow: hidden;
 }
 
-#scroll-line3 > .scroll-item {
+.scroll-line > .scroll-item {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 20px;
   gap: 1.5rem;
-  animation: scroll-left 30s linear infinite;
+  /* animation: scroll-left 30s linear infinite; */
 }
 
-#scroll-line3 > .scroll-item .brand-name {
+.scroll-line > .scroll-item .brand-name {
   position: relative;
   display: flex;
   align-items: center;
@@ -2552,7 +2575,7 @@ body {
 }
 
 /* top line */
-#scroll-line3 > .scroll-item .brand-name .top-line {
+.scroll-line > .scroll-item .brand-name .top-line {
   position: absolute;
   top: 0;
   left: 20%;
@@ -2562,7 +2585,7 @@ body {
 }
 
 /* logo */
-#scroll-line3 > .scroll-item .brand-name .brand-logo {
+.scroll-line > .scroll-item .brand-name .brand-logo {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
@@ -2572,7 +2595,7 @@ body {
 }
 
 /* name text */
-#scroll-line3 > .scroll-item .brand-name .name {
+.scroll-line > .scroll-item .brand-name .name {
   display: flex;
   padding-right: 1.75rem;
   justify-content: center;
@@ -2615,5 +2638,13 @@ body {
   }
   100% {
     transform: translateX(0%);
+  }
+}
+@keyframes scroll-right {
+  0% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

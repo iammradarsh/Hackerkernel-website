@@ -274,19 +274,19 @@ industryCarousel();
 function portfolioProjects() {
   const projectImages = [
     {
-      imageUrl: "./Assets/Project-1.jpg",
+      imageUrl: "./Assets/Project-1.webp",
       type: "Mobile App",
       typeIcon: "./Assets/mobile-icon.svg",
       softwareUsedIcon: "./Assets/flutter-icon.svg",
     },
     {
-      imageUrl: "./Assets/Project-2.jpg",
+      imageUrl: "./Assets/Project-2.webp",
       type: "Web App",
       typeIcon: "./Assets/react-icon.svg",
       softwareUsedIcon: "./Assets/react-icon.svg",
     },
     {
-      imageUrl: "./Assets/Project-3.jpg",
+      imageUrl: "./Assets/Project-3.webp",
       type: "Mobile App",
       typeIcon: "./Assets/mobile-icon.svg",
       softwareUsedIcon: "./Assets/react-icon.svg",
@@ -387,9 +387,10 @@ function testimonial() {
 // testimonial();
 function brandColor() {
   document.addEventListener("DOMContentLoaded", function () {
-    const scrollItem = document.querySelector("#scroll-line3 .scroll-item");
+    // List of scroll lines to target
+    const scrollLines = ["scroll-line3", "scroll-line4"];
 
-    // Example data (you can replace with your own list)
+    // Example data (replace or customize for each scroll line if needed)
     const brands = [
       { name: "Light Foot", logo: "https://via.placeholder.com/40x40?text=A" },
       { name: "Fast Wheels", logo: "https://via.placeholder.com/40x40?text=B" },
@@ -397,62 +398,89 @@ function brandColor() {
       { name: "Dark Speed", logo: "https://via.placeholder.com/40x40?text=D" },
       { name: "Power Drive", logo: "https://via.placeholder.com/40x40?text=E" },
       { name: "Mega Ride", logo: "https://via.placeholder.com/40x40?text=F" },
-      { name: "Mega Ride", logo: "https://via.placeholder.com/40x40?text=F" },
-      { name: "Mega Ride", logo: "https://via.placeholder.com/40x40?text=F" },
-      { name: "Mega Ride", logo: "https://via.placeholder.com/40x40?text=F" },
-      { name: "Mega Ride", logo: "https://via.placeholder.com/40x40?text=F" },
-      { name: "Mega Ride", logo: "https://via.placeholder.com/40x40?text=F" },
     ];
 
-    brands.forEach((brand, index) => {
-      // create button
-      const btn = document.createElement("button");
-      btn.classList.add("brand-name");
+    scrollLines.forEach((lineId) => {
+      const scrollItem = document.querySelector(`#${lineId} .scroll-item`);
+      if (!scrollItem) return;
 
-      // top line
-      const topLine = document.createElement("div");
-      topLine.classList.add("top-line");
+      brands.forEach((brand, index) => {
+        // create button
+        const btn = document.createElement("button");
+        btn.classList.add("brand-name");
 
-      // logo
-      const logo = document.createElement("div");
-      logo.classList.add("brand-logo");
-      logo.style.backgroundImage = `url(${brand.logo})`;
+        // top line
+        const topLine = document.createElement("div");
+        topLine.classList.add("top-line");
 
-      // name
-      const name = document.createElement("p");
-      name.classList.add("name");
-      name.textContent = brand.name;
+        // logo
+        const logo = document.createElement("div");
+        logo.classList.add("brand-logo");
+        logo.style.backgroundImage = `url(${brand.logo})`;
 
-      // append elements
-      btn.appendChild(topLine);
-      btn.appendChild(logo);
-      btn.appendChild(name);
-      scrollItem.appendChild(btn);
+        // name
+        const name = document.createElement("p");
+        name.classList.add("name");
+        name.textContent = brand.name;
 
-      // style(repeat every 3 cards)
-      const pattern = index % 3;
-      if (pattern === 0) {
-        // White
-        btn.style.background = "white";
-        name.style.color = "#ed313a";
-        topLine.style.background = "#ed313a";
-        logo.style.backgroundColor = "#383636";
-      } else if (pattern === 1) {
-        // #ed313a
-        btn.style.background = "#ed313a";
-        name.style.color = "white";
-        topLine.style.background = "white";
-        logo.style.backgroundColor = "#383636";
-      } else {
-        // Dark
-        btn.style.background = "#383636";
-        btn.style.border = "2px solid white";
-        name.style.color = "white";
-        topLine.style.background = "white";
-        topLine.style.border = "1px solid white";
-        logo.style.backgroundColor = "#ed313a";
-      }
+        // append elements
+        btn.appendChild(topLine);
+        btn.appendChild(logo);
+        btn.appendChild(name);
+        scrollItem.appendChild(btn);
+
+        // style (repeat every 3 cards)
+        const pattern = index % 3;
+        if (pattern === 0) {
+          btn.style.background = "white";
+          name.style.color = "#ed313a";
+          topLine.style.background = "#ed313a";
+          logo.style.backgroundColor = "#383636";
+        } else if (pattern === 1) {
+          btn.style.background = "#ed313a";
+          name.style.color = "white";
+          topLine.style.background = "white";
+          logo.style.backgroundColor = "#383636";
+        } else {
+          btn.style.background = "#383636";
+          btn.style.border = "2px solid white";
+          name.style.color = "white";
+          topLine.style.background = "white";
+          topLine.style.border = "1px solid white";
+          logo.style.backgroundColor = "#ed313a";
+        }
+      });
     });
   });
 }
+
 brandColor();
+function tagScroller() {
+  const scrollLines = document.querySelectorAll(".scroll-line");
+
+  scrollLines.forEach((line) => {
+    const startX = line.dataset.start || "100%"; // default 100% agar data attribute na ho
+    const scrollItems = line.querySelectorAll(".scroll-item");
+
+    scrollItems.forEach((item) => {
+      gsap.fromTo(
+        item,
+        { x: startX },
+        {
+          x: "0%",
+          ease: "power3.out",
+          scrollTrigger: {
+            scroller: ".main",
+            trigger: item,
+            start: "top 80%",
+            end: "bottom 0%",
+            scrub: 4,
+            markers: true,
+          },
+        }
+      );
+    });
+  });
+}
+
+tagScroller();
