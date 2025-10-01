@@ -26,7 +26,7 @@ body {
   min-height: 100vh;
   background-color: #e9e9e9;
   font-family: "Plus Jakarta Sans", sans-serif;
-  background-image: url("./Assets/main-bg.png");
+  background-image: url("./Assets/main-bg.webp");
   background-size: contain;
   background-position: top;
 }
@@ -299,7 +299,7 @@ body {
 .section-wrapper {
   background-color: #383636;
   border-radius: 100px 100px 0 0px;
-  background-image: url("./Assets/second-main-bg.png");
+  background-image: url("./Assets/second-main-bg.webp");
   background-size: cover;
 }
 
@@ -408,7 +408,7 @@ body {
   height: 19.50406rem;
   background-color: #010205;
   color: white;
-  background-image: url("/Assets/920+-bg.png");
+  background-image: url("/Assets/920+-bg.webp");
   background-size: cover;
   padding: 2vw;
   /* width: 30%; */
@@ -437,7 +437,7 @@ body {
   border-radius: 24px;
   overflow: hidden;
   /* background-color: #fff; */
-  background-image: url("./Assets/Team-video.png");
+  background-image: url("./Assets/Team-video.webp");
   background-size: cover;
 }
 .client-images {
@@ -515,6 +515,7 @@ body {
 
 #third-section {
   position: relative;
+  backdrop-filter: blur(4px);
 }
 
 .service-list {

@@ -39,7 +39,7 @@ locoIntialize();
 
 function swiper() {
   const images = [
-    "./Assets/Case_studies_image_1.png",
+    "./Assets/Case_studies_image_1.webp",
     "https://picsum.photos/id/1016/1200/800",
     "https://picsum.photos/id/1018/1200/800",
     "https://picsum.photos/id/1020/1200/800",
@@ -222,25 +222,25 @@ function industryCarousel() {
       number: 1,
       title: "Foodtech",
       desc: "Smart solutions to simplify ordering, delivery, and customer engagement.",
-      img: "./Assets/Industry-1.png",
+      img: "./Assets/Industry-1.webp",
     },
     {
       number: 2,
       title: "Traveltech",
       desc: "Seamless platforms for bookings, itineraries, and personalized travel experiences.",
-      img: "./Assets/Industry-2.png",
+      img: "./Assets/Industry-2.webp",
     },
     {
       number: 3,
       title: "Healthcare",
       desc: "Digital tools that enhance patient care, access, and efficiency.",
-      img: "./Assets/Industry-3.png",
+      img: "./Assets/Industry-3.webp",
     },
     {
       number: 4,
       title: "Edtech",
       desc: "Smart learning tools to empower students and educators.",
-      img: "./Assets/Industry-4.png",
+      img: "./Assets/Industry-4.webp",
     },
   ];
 
