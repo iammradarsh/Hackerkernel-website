@@ -1,6 +1,103 @@
 var tl = gsap.timeline();
 window.addEventListener("DOMContentLoaded", slider);
 
+function centerNavAnimation() {
+  const navCircle = document.querySelector(".nav-circle");
+  const navlinks = document.querySelector(".navlinks");
+  const middleNav = document.querySelector(".middle-nav");
+  const buttons = document.querySelectorAll(".navlinks button");
+
+  let expandedOnce = false;
+
+  function setInitialCirclePos() {
+    const parentRect = middleNav.getBoundingClientRect(); // middle-nav
+    const initLeftPx = -0.03 * parentRect.width; // -10% of middle-nav
+    const centerY = parentRect.height / 2;
+    navCircle.style.left = `${initLeftPx}px`;
+    navCircle.style.top = `${centerY}px`;
+    navCircle.style.width = "10px";
+    navCircle.style.height = "10px";
+  }
+  setInitialCirclePos();
+
+  function elementCenterRelative(el) {
+    const elRect = el.getBoundingClientRect();
+    const parentRect = middleNav.getBoundingClientRect(); // middleNav
+    const { paddingLeft, paddingRight } = getComputedStyle(middleNav);
+    const leftPad = parseFloat(paddingLeft);
+    const rightPad = parseFloat(paddingRight);
+    const usableWidth = parentRect.width - leftPad - rightPad;
+
+    const centerX = elRect.left - parentRect.left - leftPad + elRect.width / 2;
+
+    const centerY = elRect.top - parentRect.top + elRect.height / 2;
+    return { centerX, centerY, width: elRect.width, height: elRect.height };
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const { centerX, centerY, width, height } = elementCenterRelative(btn);
+
+      const styles = getComputedStyle(middleNav);
+      const leftPad = parseFloat(styles.paddingLeft);
+      const rightPad = parseFloat(styles.paddingRight);
+
+      // for padding of middle nav
+      const padLeft = leftPad - 6;
+      const padRight = rightPad + 6;
+      const padY = 8;
+
+      const finalW = Math.round(width + padLeft + padRight);
+      const finalH = Math.round(height + padY);
+
+      if (!expandedOnce) {
+        gsap.to(navCircle, {
+          duration: 0.8,
+          left: `${centerX}px`,
+          top: `${centerY}px`,
+          width: finalW,
+          height: finalH,
+          borderRadius: 24,
+          ease: "power3.out",
+          onComplete: () => (expandedOnce = true),
+        });
+      } else {
+        gsap.to(navCircle, {
+          duration: 0.6,
+          left: `${centerX}px`,
+          top: `${centerY}px`,
+          width: finalW,
+          height: finalH,
+          borderRadius: 24,
+          ease: "power3.out",
+        });
+      }
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    setInitialCirclePos();
+    const active = document.querySelector(".navlinks button.active");
+    if (active && expandedOnce) {
+      // recalc and snap to active
+      const { centerX, centerY, width, height } = elementCenterRelative(active);
+      const padX = 18;
+      const padY = 8;
+      gsap.set(navCircle, {
+        left: `${centerX}px`,
+        top: `${centerY}px`,
+        width: Math.round(width + padX),
+        height: Math.round(height + padY),
+      });
+    }
+  });
+}
+
+centerNavAnimation();
+
 function locoIntialize() {
   const scroll = new LocomotiveScroll({
     el: document.querySelector(".main"),
@@ -129,6 +226,37 @@ function swiper() {
 }
 
 swiper();
+
+function serviceImgSlides() {
+  const services = document.querySelectorAll(".services");
+
+  services.forEach((service) => {
+    const serviceImg = service.querySelector("img");
+
+    service.addEventListener("mouseenter", () => {
+      gsap.to(serviceImg, {
+        duration: 0.8,
+        opacity: 1,
+        bottom: "0%",
+        transform: "rotate(20deg)",
+        ease: "power3.out",
+      });
+    });
+
+    service.addEventListener("mouseleave", () => {
+      gsap.to(serviceImg, {
+        duration: 0.8,
+        opacity: 0,
+        bottom: "-50%",
+        transform: "rotate(0deg)",
+
+        ease: "power3.in",
+      });
+    });
+  });
+}
+
+serviceImgSlides();
 
 function slider() {
   const carousel = document.querySelector(".carousel"),
@@ -475,7 +603,7 @@ function tagScroller() {
             start: "top 80%",
             end: "bottom 0%",
             scrub: 4,
-            markers: true,
+            // markers: true,
           },
         }
       );
